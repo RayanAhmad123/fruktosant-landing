@@ -13,9 +13,11 @@
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="sv_SE" />
 
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800;12..96,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800;12..96,900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500&display=swap" rel="stylesheet" />
+
 
   <style>
     :root {
@@ -81,14 +83,13 @@
       margin: 0 auto;
     }
     .logo {
-      font-family: 'Bricolage Grotesque', sans-serif;
-      font-weight: 900;
-      font-size: 22px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
-    .logo span { color: var(--watermelon); }
+    .logo .logo-svg { height: 44px; width: auto; display: block; }
+    .footer-brand .logo .logo-svg { height: 72px; }
+    .hero-logo { width: 78%; max-width: 380px; }
     .nav-links {
       display: none;
       gap: 28px;
@@ -188,59 +189,74 @@
     }
     .btn-secondary:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
 
-    /* hero visual */
+    /* hero visual — clean centerpiece, no overflow elements */
     .hero-visual {
       position: relative;
-      aspect-ratio: 1 / 1;
-      max-width: 480px;
+      width: 100%;
+      max-width: 440px;
       margin: 0 auto;
-    }
-    .fruit-stage {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      place-items: center;
+      aspect-ratio: 1 / 1;
     }
     .plate {
       position: absolute;
-      width: 92%;
-      height: 92%;
-      background: radial-gradient(circle at 50% 50%, #fff 0%, #fff 60%, #f7e1c0 61%, #f7e1c0 100%);
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 45%, #FFF7EC 0%, #FFE9CC 60%, #F0D39A 100%);
       border-radius: 50%;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.3), inset 0 0 0 8px #f7e1c0, inset 0 0 0 10px #fff, inset 0 0 0 18px #f0d39a;
+      box-shadow:
+        0 30px 80px rgba(0,0,0,0.35),
+        inset 0 0 0 8px #F7E1C0,
+        inset 0 0 0 10px #FFF7EC,
+        inset 0 0 0 18px #E8C792;
     }
-    .fruit {
+    .hero-logo {
       position: absolute;
-      font-size: 76px;
-      filter: drop-shadow(0 6px 8px rgba(0,0,0,0.25));
-      animation: float 5s ease-in-out infinite;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      max-width: 320px;
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,0.18));
     }
-    .fruit.f1 { top: 14%; left: 20%; animation-delay: 0s; }
-    .fruit.f2 { top: 18%; right: 18%; animation-delay: .6s; }
-    .fruit.f3 { bottom: 22%; left: 15%; animation-delay: 1.2s; font-size: 88px; }
-    .fruit.f4 { bottom: 18%; right: 14%; animation-delay: 1.8s; }
-    .fruit.f5 { top: 50%; left: 50%; transform: translate(-50%, -50%); animation-delay: .9s; font-size: 96px; }
-    .badge-floating {
+    .hero-fruits {
       position: absolute;
-      background: var(--sun);
-      color: var(--ink);
-      font-weight: 800;
-      padding: 14px 20px;
-      border-radius: 18px;
-      border: 2px solid var(--ink);
-      box-shadow: 4px 4px 0 var(--ink);
-      transform: rotate(-8deg);
-      font-size: 15px;
-      max-width: 170px;
-      text-align: center;
-      line-height: 1.2;
+      bottom: 14%;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: clamp(10px, 3vw, 18px);
+      font-size: clamp(28px, 6vw, 40px);
+      filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));
     }
-    .badge-tl { top: 0; left: -8px; }
-    .badge-br { bottom: 6px; right: -8px; transform: rotate(6deg); background: var(--lime); }
+    .hero-fruits span { animation: bob 4s ease-in-out infinite; }
+    .hero-fruits span:nth-child(2) { animation-delay: .6s; }
+    .hero-fruits span:nth-child(3) { animation-delay: 1.2s; }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(-2deg); }
-      50% { transform: translateY(-12px) rotate(3deg); }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+    .hero-tag {
+      background: rgba(255, 247, 236, 0.18);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      color: var(--cream);
+      border: 1.5px solid rgba(255, 247, 236, 0.35);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    @media (max-width: 480px) {
+      .hero-tags { gap: 6px; flex-wrap: nowrap; }
+      .hero-tag { padding: 6px 10px; font-size: 11px; white-space: nowrap; }
     }
 
     /* ===== MARQUEE ===== */
@@ -432,44 +448,186 @@
     .stat:nth-child(3) .num { color: var(--lime-deep); }
     .stat:nth-child(4) .num { color: var(--watermelon-deep); }
 
-    .social-grid {
+    /* social embed area */
+    .embed-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      max-width: 880px;
+      grid-template-columns: 1fr;
+      gap: 28px;
+      max-width: 1100px;
       margin: 0 auto;
     }
-    @media (min-width: 700px) { .social-grid { grid-template-columns: repeat(4, 1fr); gap: 18px; } }
-    .post {
-      aspect-ratio: 9 / 14;
-      border-radius: 22px;
+    @media (min-width: 900px) {
+      .embed-grid { grid-template-columns: 1fr 1fr; gap: 36px; align-items: stretch; }
+      .tiktok-card, .ig-card { height: 100%; }
+    }
+
+    .embed-col h3 {
+      font-size: 22px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .embed-col h3 .pill {
+      font-size: 12px;
+      font-weight: 700;
+      background: var(--ink);
+      color: var(--sun);
+      padding: 4px 10px;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .tiktok-card,
+    .ig-card {
+      background: var(--cream);
       border: 2.5px solid var(--ink);
-      box-shadow: 5px 5px 0 var(--ink);
-      position: relative;
+      border-radius: 24px;
+      padding: 18px;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .tiktok-card .embed-wrap {
+      border-radius: 14px;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      background: #FFF7EC;
+    }
+    .tiktok-card blockquote.tiktok-embed {
+      margin: 0 !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      width: 100% !important;
+      border: 0 !important;
+    }
+    /* TikTok injects an iframe inside the blockquote — make it fluid */
+    .tiktok-card iframe {
+      max-width: 100% !important;
+      width: 100% !important;
+      height: auto;
+    }
+
+    /* Instagram card: phone-mockup preview with gradient frame */
+    .ig-card { display: flex; flex-direction: column; gap: 14px; padding: 22px 18px; }
+    .ig-phone {
+      position: relative;
+      border-radius: 28px;
+      padding: 4px;
+      background: linear-gradient(135deg, #FEDA77 0%, #F58529 18%, #DD2A7B 50%, #8134AF 78%, #515BD4 100%);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    .ig-phone-inner {
+      background: var(--cream);
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .ig-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px 10px;
+    }
+    .ig-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, #FFD93D 0%, #FF8C42 50%, #FF4D6D 100%);
       display: grid;
       place-items: center;
-      font-size: 84px;
-      transition: transform .2s ease;
-    }
-    .post:hover { transform: translateY(-5px) rotate(-1deg); }
-    .post.p1 { background: linear-gradient(135deg, var(--watermelon), var(--mango)); }
-    .post.p2 { background: linear-gradient(135deg, var(--mango), var(--sun)); }
-    .post.p3 { background: linear-gradient(135deg, var(--lime), var(--sun)); }
-    .post.p4 { background: linear-gradient(135deg, var(--watermelon-deep), var(--watermelon)); }
-    .post-overlay {
-      position: absolute;
-      bottom: 12px;
-      left: 12px;
-      right: 12px;
-      background: rgba(26,15,8,0.85);
       color: var(--cream);
-      padding: 8px 12px;
-      border-radius: 12px;
-      font-size: 12px;
-      font-weight: 600;
-      text-align: center;
+      font-weight: 900;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 16px;
+      border: 2px solid var(--ink);
+      flex-shrink: 0;
     }
+    .ig-handle-block { display: flex; flex-direction: column; line-height: 1.2; min-width: 0; }
+    .ig-handle { font-weight: 800; font-size: 15px; color: var(--ink); }
+    .ig-bio { font-size: 12px; color: #5a4232; font-weight: 600; }
+
+    .ig-mosaic {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .ig-tile {
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+      font-size: 38px;
+      position: relative;
+      transition: transform .15s ease;
+    }
+    .ig-tile:hover { transform: scale(1.04); z-index: 2; }
+    .ig-tile.t1 { background: linear-gradient(135deg, #FF4D6D, #FF8C42); }
+    .ig-tile.t2 { background: linear-gradient(135deg, #FF8C42, #FFD93D); }
+    .ig-tile.t3 { background: linear-gradient(135deg, #C7E94A, #FFD93D); }
+    .ig-tile.t4 { background: linear-gradient(135deg, #E91E51, #FF4D6D); }
+    .ig-tile.t5 { background: linear-gradient(135deg, #FFD93D, #C7E94A); }
+    .ig-tile.t6 { background: linear-gradient(135deg, #FF8C42, #E91E51); }
+    .ig-tile::after {
+      content: '';
+      position: absolute;
+      top: 6px; right: 6px;
+      width: 12px; height: 12px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 2px;
+      box-shadow: -3px 3px 0 rgba(255,255,255,0.5);
+    }
+    .ig-actions { padding: 10px 14px 14px; display: flex; gap: 12px; align-items: center; font-size: 14px; color: var(--ink); }
+    .ig-actions .ig-icon { font-size: 18px; }
+
+    .ig-follow-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 2px solid var(--ink);
+      background: linear-gradient(90deg, #f58529, #dd2a7b, #8134af);
+      color: #fff;
+      font-weight: 700;
+      transition: transform .15s;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .ig-follow-btn:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+
+    /* IG feed wrap — horizontal scroll for multiple posts */
+    .ig-feed-wrap {
+      display: flex;
+      gap: 14px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 6px;
+      scrollbar-width: thin;
+    }
+    .ig-feed-wrap > * { flex: 0 0 auto; scroll-snap-align: start; }
+    .ig-feed-wrap::-webkit-scrollbar { height: 8px; }
+    .ig-feed-wrap::-webkit-scrollbar-thumb { background: rgba(26,15,8,0.25); border-radius: 4px; }
+    .ig-feed-wrap iframe { border-radius: 14px !important; }
+
+    .hashtag-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 40px;
+    }
+    .hashtag-row .htag {
+      background: var(--ink);
+      color: var(--sun);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 0.02em;
+    }
+    .hashtag-row .htag.alt { background: var(--watermelon); color: var(--cream); }
+    .hashtag-row .htag.alt2 { background: var(--lime); color: var(--ink); }
 
     /* ===== VISIT ===== */
     .visit {
@@ -578,20 +736,137 @@
     }
     @media (min-width: 700px) { .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
 
-    /* small screens spacing fix */
-    @media (max-width: 500px) {
+    /* ==============================
+       MOBILE RESPONSIVE
+       ============================== */
+
+    /* Tablet & below */
+    @media (max-width: 900px) {
+      section { padding: 70px 0; }
+      .hero { padding: 50px 0 80px; }
+      .section-head { margin-bottom: 44px; }
+    }
+
+    /* Phone */
+    @media (max-width: 700px) {
+      .container { padding: 0 18px; }
+      section { padding: 60px 0; }
       .hero { padding: 40px 0 70px; }
+
+      h1, h2, h3 { letter-spacing: -0.02em; }
+      .section-head h2 { font-size: clamp(28px, 8vw, 40px); }
+      .section-head p { font-size: 15.5px; }
+
+      /* nav */
+      .nav-inner { padding: 12px 18px; }
+      .logo .logo-svg { height: 36px; }
+      .nav-cta { padding: 9px 14px; font-size: 13px; }
+
+      /* hero */
+      .hero h1 { font-size: clamp(40px, 11vw, 72px); }
+      .hero p.lead { font-size: 16px; margin: 18px 0 28px; }
+      .eyebrow { font-size: 12px; padding: 6px 12px; margin-bottom: 18px; }
+      .hero-grid { gap: 28px; }
       .hero-visual { max-width: 320px; }
-      .badge-floating { font-size: 13px; padding: 10px 14px; }
+      .badge-floating { font-size: 12px; padding: 8px 12px; max-width: 130px; }
+      .badge-tl { left: -4px; top: -4px; }
+      .badge-br { right: -4px; bottom: 0; }
+      .fruit { font-size: 44px; }
+      .fruit.f3 { font-size: 50px; }
+      .fruit.f5 { font-size: 38px; }
+      .btn { padding: 14px 22px; font-size: 15px; }
+
+      /* marquee */
+      .marquee { padding: 14px 0; }
+      .marquee-track { font-size: 18px; gap: 32px; animation-duration: 18s; }
+
+      /* combos */
+      .combo { min-height: auto; padding: 24px 20px; }
+      .combo-emoji { font-size: 54px; margin-bottom: 14px; }
+      .combo h3 { font-size: 20px; }
+      .combo p { font-size: 14px; }
+
+      /* steps */
+      .step { padding: 28px 22px; }
+      .step h3 { font-size: 20px; }
+      .step-num { width: 38px; height: 38px; font-size: 17px; top: -19px; left: 20px; }
+
+      /* viral */
+      .stats { gap: 12px; }
+      .stat { padding: 18px 12px; }
+      .stat .num { font-size: 28px; }
+      .stat .lbl { font-size: 12px; }
+      .embed-grid { gap: 32px; }
+      .embed-col h3 { font-size: 19px; }
+      .embed-col h3 .pill { font-size: 11px; padding: 3px 8px; }
+      .tiktok-card, .ig-card { padding: 14px; border-radius: 20px; }
+      .tiktok-feed { aspect-ratio: 9 / 16; max-height: 640px; }
+      .ig-phone-inner { border-radius: 20px; }
+      .ig-tile { font-size: 32px; }
+      .ig-avatar { width: 38px; height: 38px; font-size: 13px; }
+      .hashtag-row { gap: 8px; margin-top: 28px; }
+      .hashtag-row .htag { font-size: 12.5px; padding: 7px 12px; }
+
+      /* visit */
+      .visit-card { padding: 28px 22px; border-radius: 22px; }
+      .visit-card h3 { font-size: 22px; margin-bottom: 12px; }
+      .visit-card .row { font-size: 14.5px; padding: 10px 0; }
+      .order-link { padding: 14px 16px; font-size: 14.5px; }
+
+      /* CTA strip */
+      .cta-strip { padding: 50px 0; }
+      .cta-strip h2 { font-size: clamp(26px, 7vw, 36px); }
+
+      /* footer */
+      footer { padding: 40px 0 24px; }
+      .footer-brand .logo .logo-svg { height: 56px; }
+      .footer-grid { gap: 24px; margin-bottom: 24px; }
+    }
+
+    /* Small phone */
+    @media (max-width: 380px) {
+      .nav-cta { padding: 8px 12px; font-size: 12.5px; }
+      .logo .logo-svg { height: 32px; }
+      .hero h1 { font-size: 38px; }
+      .hero-visual { max-width: 280px; }
+      .badge-floating { font-size: 11px; padding: 7px 10px; max-width: 110px; }
+      .marquee-track { font-size: 16px; gap: 24px; }
+      .combo-emoji { font-size: 48px; }
+      .stat .num { font-size: 24px; }
+      .tiktok-feed { max-height: 580px; }
+    }
+
+    /* Tap-target safety: anything that's an action should be at least 44px tall */
+    @media (max-width: 900px) {
+      .order-link, .nav-cta, .ig-follow-btn, .btn { min-height: 44px; }
+    }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .fruit { animation: none; }
+      .marquee-track { animation-duration: 0s; transform: none; }
+      * { scroll-behavior: auto; }
     }
   </style>
 </head>
 <body>
 
+  <!-- INLINE SVG SYMBOLS (FØS wordmark — dark + light variants) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="fos-logo-dark" viewBox="0 0 720 280">
+      <text x="360" y="210" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="900" font-size="260" fill="#5C2A1C">F&#216;S</text>
+    </symbol>
+    <symbol id="fos-logo-light" viewBox="0 0 720 280">
+      <text x="360" y="210" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-weight="900" font-size="260" fill="#FFF7EC">F&#216;S</text>
+    </symbol>
+  </svg>
+
   <!-- NAV -->
   <nav>
     <div class="nav-inner">
-      <a href="#" class="logo">Frukt <span>&amp;</span> Sånt</a>
+      <a href="#" class="logo" aria-label="FØS — Frukt Sånt">
+        <svg class="logo-svg" viewBox="0 0 720 420" role="img" aria-label="FØS — Frukt Sånt"><use href="#fos-logo-dark"/></svg>
+      </a>
       <div class="nav-links">
         <a href="#combos">Våra kombos</a>
         <a href="#viralt">Viralt</a>
@@ -614,19 +889,21 @@
           <a href="#besok" class="btn btn-primary">Beställ online 🛵</a>
           <a href="#combos" class="btn btn-secondary">Se menyn 🍉</a>
         </div>
+        <div class="hero-tags">
+          <span class="hero-tag">🌶️ Tajín &amp; lime</span>
+          <span class="hero-tag">🍫 Smält choklad</span>
+          <span class="hero-tag">🍓 Pistage &amp; kadayif</span>
+        </div>
       </div>
 
       <div class="hero-visual">
-        <div class="fruit-stage">
-          <div class="plate"></div>
-          <div class="fruit f1">🍓</div>
-          <div class="fruit f2">🥭</div>
-          <div class="fruit f3">🍉</div>
-          <div class="fruit f4">🍍</div>
-          <div class="fruit f5">🍫</div>
+        <div class="plate"></div>
+        <svg class="hero-logo" viewBox="0 0 720 280" role="img" aria-label="FØS — Frukt Sånt"><use href="#fos-logo-dark"/></svg>
+        <div class="hero-fruits">
+          <span>🍉</span>
+          <span>🥭</span>
+          <span>🍓</span>
         </div>
-        <div class="badge-floating badge-tl">Med chili &amp; lime 🌶️</div>
-        <div class="badge-floating badge-br">Smält choklad ✨</div>
       </div>
     </div>
   </header>
@@ -719,13 +996,13 @@
     <div class="container">
       <div class="section-head">
         <div class="section-eyebrow">Som du sett på TikTok</div>
-        <h2>Du har förmodligen redan svikit oss.</h2>
-        <p>Dela en tallrik, tagga oss, och du landar i feeden. Det är så vi blivit Stockholms mest filmade fruktbar.</p>
+        <h2>Direkt från <span style="color: var(--watermelon);">@fruktosant</span>.</h2>
+        <p>Färska droppar varje vecka. Dela en tallrik, tagga oss med <strong>#fruktøsånt</strong> och du landar i feeden.</p>
       </div>
 
       <div class="stats">
         <div class="stat">
-          <div class="num">100K+</div>
+          <div class="num">10K+</div>
           <div class="lbl">följare</div>
         </div>
         <div class="stat">
@@ -742,23 +1019,81 @@
         </div>
       </div>
 
-      <div class="social-grid">
-        <a href="https://www.tiktok.com/@fruktosant" target="_blank" rel="noopener" class="post p1">
-          🍉
-          <div class="post-overlay">@fruktosant · TikTok</div>
-        </a>
-        <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="post p2">
-          🥭
-          <div class="post-overlay">@fruktosant · Instagram</div>
-        </a>
-        <a href="https://www.tiktok.com/@fruktosant" target="_blank" rel="noopener" class="post p3">
-          🍓
-          <div class="post-overlay">Ny drop · varje vecka</div>
-        </a>
-        <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="post p4">
-          🍍
-          <div class="post-overlay">Tagga oss för repost</div>
-        </a>
+      <div class="embed-grid">
+        <!-- TikTok column — creator profile embed (shows multiple recent videos) -->
+        <div class="embed-col">
+          <h3>TikTok <span class="pill">@fruktosant</span></h3>
+          <div class="tiktok-card">
+            <div class="embed-wrap">
+              <blockquote class="tiktok-embed"
+                cite="https://www.tiktok.com/@fruktosant"
+                data-unique-id="fruktosant"
+                data-embed-type="creator"
+                style="max-width: 780px; min-width: 288px;">
+                <section>
+                  <a target="_blank" href="https://www.tiktok.com/@fruktosant?refer=creator_embed">@fruktosant</a>
+                </section>
+              </blockquote>
+            </div>
+            <div style="display:flex; gap:10px; margin-top: 14px; flex-wrap: wrap;">
+              <a href="https://www.tiktok.com/@fruktosant" target="_blank" rel="noopener" class="btn btn-primary" style="padding: 12px 18px; font-size: 14px;">Följ på TikTok →</a>
+              <a href="https://www.tiktok.com/@fruktosant" target="_blank" rel="noopener" class="btn btn-secondary" style="padding: 12px 18px; font-size: 14px;">Öppna i appen</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Instagram column — public-post blockquote embeds (no IG account auth required) -->
+        <div class="embed-col">
+          <h3>Instagram <span class="pill" style="background: var(--watermelon); color: var(--cream);">@fruktosant</span></h3>
+          <div class="ig-card">
+            <!--
+              Live IG feed via Instagram's official blockquote embed.
+              SETUP: paste post/reel URLs into window.FOS_IG_POSTS in the script
+              block at the bottom of this file. No Instagram login required —
+              the URLs just need to point to public posts.
+            -->
+            <div id="ig-feed-mount" aria-label="Instagram feed @fruktosant"></div>
+
+            <!-- Fallback (always rendered; hidden via JS once posts load) -->
+            <div id="ig-fallback" class="ig-phone">
+              <div class="ig-phone-inner">
+                <div class="ig-header">
+                  <div class="ig-avatar">FØS</div>
+                  <div class="ig-handle-block">
+                    <span class="ig-handle">fruktosant</span>
+                    <span class="ig-bio">FRUKT ø SÅNT · Stockholm 🍉🥭</span>
+                  </div>
+                </div>
+                <div class="ig-mosaic">
+                  <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="ig-tile t1" aria-label="Watermelon post">🍉</a>
+                  <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="ig-tile t2" aria-label="Mango post">🥭</a>
+                  <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="ig-tile t3" aria-label="Strawberry post">🍓</a>
+                  <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="ig-tile t4" aria-label="Chocolate post">🍫</a>
+                  <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="ig-tile t5" aria-label="Pineapple post">🍍</a>
+                  <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="ig-tile t6" aria-label="Tajín post">🌶️</a>
+                </div>
+                <div class="ig-actions">
+                  <span class="ig-icon">♡</span>
+                  <span class="ig-icon">💬</span>
+                  <span class="ig-icon">↗</span>
+                  <span style="margin-left:auto; font-size:12px; color:#5a4232;">Senaste reels →</span>
+                </div>
+              </div>
+            </div>
+
+            <a href="https://www.instagram.com/fruktosant/" target="_blank" rel="noopener" class="ig-follow-btn">
+              Följ på Instagram →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hashtag-row">
+        <span class="htag">#fruktøsånt</span>
+        <span class="htag alt">#føs</span>
+        <span class="htag alt2">#fyp</span>
+        <span class="htag">#viral</span>
+        <span class="htag alt">#stockholm</span>
       </div>
     </div>
   </section>
@@ -776,9 +1111,8 @@
         <div class="visit-card">
           <h3>📍 I caféet</h3>
           <p style="margin-bottom: 14px; color: #5a4232;">Stockholm — se aktuell adress på vår Instagram.</p>
-          <div class="row"><span class="day">Mån–Fre</span><span class="hr">11:00 – 21:00</span></div>
-          <div class="row"><span class="day">Lördag</span><span class="hr">12:00 – 22:00</span></div>
-          <div class="row"><span class="day">Söndag</span><span class="hr">12:00 – 20:00</span></div>
+          <div class="row"><span class="day">Mån–Lör</span><span class="hr">15:00 – 22:00</span></div>
+          <div class="row"><span class="day">Söndag</span><span class="hr">Stängt</span></div>
           <p style="margin-top: 16px; font-size: 13px; color: #5a4232;">* Kontrollera aktuella öppettider på vår Instagram innan ditt besök.</p>
         </div>
 
@@ -817,7 +1151,9 @@
     <div class="container">
       <div class="footer-grid">
         <div class="footer-brand">
-          <a href="#" class="logo">Frukt <span style="color: var(--watermelon);">&amp;</span> Sånt</a>
+          <a href="#" class="logo" aria-label="FØS — Frukt Sånt">
+            <svg class="logo-svg" viewBox="0 0 720 420" role="img" aria-label="FØS — Frukt Sånt"><use href="#fos-logo-light"/></svg>
+          </a>
           <p>Färska fruktkombos i Stockholm. Med kärlek till rätt råvaror, rätt toppings och en feed som doftar mango.</p>
         </div>
         <div>
@@ -844,8 +1180,59 @@
     </div>
   </footer>
 
+  <!--
+    👇 PASTE INSTAGRAM POST / REEL URLS HERE TO ENABLE THE LIVE FEED.
+    No Instagram login is needed — just visit instagram.com/fruktosant in any
+    browser, click any post or reel, copy the URL from the address bar, and
+    paste it below. 3–6 posts work well.
+  -->
   <script>
-    document.getElementById('yr').textContent = new Date().getFullYear();
+    window.FOS_IG_POSTS = [
+      // 'https://www.instagram.com/reel/ABC123/',
+      // 'https://www.instagram.com/p/XYZ456/',
+    ];
+  </script>
+
+  <!-- TikTok embed expander (creator-profile feed) -->
+  <script async src="https://www.tiktok.com/embed.js"></script>
+  <!-- Instagram embed expander (only loaded when posts are configured) -->
+  <script>
+    (function () {
+      // Year in footer
+      var yr = document.getElementById('yr');
+      if (yr) yr.textContent = new Date().getFullYear();
+
+      // Instagram feed — render blockquotes for each public post URL.
+      var mount = document.getElementById('ig-feed-mount');
+      var fallback = document.getElementById('ig-fallback');
+      var posts = (window.FOS_IG_POSTS || []).filter(function (u) { return typeof u === 'string' && u.trim(); });
+      if (!mount || posts.length === 0) return; // nothing configured — keep fallback
+
+      // Wrap with horizontal scroller for >1 post
+      var wrap = document.createElement('div');
+      wrap.className = 'ig-feed-wrap';
+      posts.forEach(function (url) {
+        var bq = document.createElement('blockquote');
+        bq.className = 'instagram-media';
+        bq.setAttribute('data-instgrm-permalink', url);
+        bq.setAttribute('data-instgrm-version', '14');
+        bq.style.background = '#FFF';
+        bq.style.border = '0';
+        bq.style.margin = '0';
+        bq.style.minWidth = '280px';
+        bq.style.maxWidth = '420px';
+        bq.style.width = '100%';
+        wrap.appendChild(bq);
+      });
+      mount.appendChild(wrap);
+      if (fallback) fallback.style.display = 'none';
+
+      // Load Instagram's embed.js (only when there's something to embed)
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.instagram.com/embed.js';
+      document.body.appendChild(s);
+    })();
   </script>
 </body>
 </html>
