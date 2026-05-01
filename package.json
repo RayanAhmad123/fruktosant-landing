@@ -1,0 +1,11 @@
+{
+  "name": "fruktosant-landing",
+  "version": "1.0.0",
+  "description": "Landing page for Frukt & Sånt — Stockholm's fresh-fruit cafe.",
+  "private": true,
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'static site — nothing to build'"
+  },
+  "license": "UNLICENSED"
+}
